@@ -7,6 +7,7 @@ export function createTrialService(config, fetchRequest = globalThis.fetch) {
     available,
     async submit(request) {
       if (!available) throw new Error('Trial request submission is not configured.');
+      if (request.privacyConsent !== 'accepted') throw new Error('Privacy authorization is required.');
       const response = await fetchRequest(config.endpoint, {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
@@ -18,6 +19,10 @@ export function createTrialService(config, fetchRequest = globalThis.fetch) {
           email: request.email,
           phone: request.phone,
           businessLink: request.businessLink,
+          privacyConsent: 'accepted',
+          privacyVersion: '2026-09-21',
+          privacyNotice: '/privacidad.html',
+          consentRecordedAt: new Date().toISOString(),
           _gotcha: request._gotcha || '',
         }),
       });

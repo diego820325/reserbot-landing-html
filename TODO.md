@@ -9,8 +9,6 @@
   Confirmed on 2026-09-21: a test sent from a separate account to
   `solicitudes@reserbot.co` arrived in the destination Gmail inbox.
   Future forwarding tests must use a sender different from the destination.
-- Creating this address does not connect the website form; the integration below
-  remains required.
 
 ## Required before launching trial-request collection
 
@@ -20,9 +18,27 @@
   it from Formspree spam. A second test (RB-FS-20260921-02) reached the Gmail
   inbox automatically on 2026-09-21 without manual spam release.
   Review the spam queue for false positives.
-- [ ] Create the Formspree form with notifications to `solicitudes@reserbot.co`,
-  confirm the recipient, and configure required fields and length limits to match
-  the website. Verify spam protection and the account's free submission quota.
+- [x] Create the Formspree form with notifications to `solicitudes@reserbot.co`
+  and verify notification delivery.
+- [ ] Verify provider-side required fields and length limits against the website.
+  Browser validation alone is not server-side validation.
+- [ ] Confirm the account uses the Free plan and inspect its quota and spam settings.
+- [ ] Complete the privacy notice with the confirmed data controller identity,
+  processing purposes, contact details, retention policy, and user rights.
+  - Publication text: [privacy notice](src/privacidad.html), version `2026-09-21`.
+    Rights, request procedures, statutory deadlines, and provider disclosures drafted.
+  - Additional jurisdiction and provider-contract review deferred at the owner's
+    request; revisit with the AWS migration. This is not a compliance finding.
+  - Implement request handling and deadline tracking; set the effective date
+    and link the reviewed notice and authorization from the form.
+  - Controller confirmed: Diego Mario Garcia Medellin, acting as an individual.
+    Public use of the name was explicitly authorized. Complete remaining fields.
+  - After incorporation, replace the individual controller with the confirmed
+    company details as applicable and notify affected data subjects of the change.
+  - Approved retention: delete non-converted trial requests six months after
+    last contact, including remaining Formspree records and email copies.
+- [ ] Implement last-contact tracking and deletion at the approved deadline.
+  No automatic deletion is configured. Define customer retention separately.
 - [x] Set the public endpoint in `src/js/trial-config.js`, test actual delivery,
   and enable collection only after verifying success and failure behavior.
 
@@ -39,6 +55,13 @@ The Formspree adapter is enabled locally. Before publication, verify provider
 field rules and the privacy notice. Automatic notification delivery has been
 verified with a fresh submission.
 
+## Publish the website
+
+- [ ] Select hosting and explicitly confirm the deployment environment.
+- [ ] Configure HTTPS and the custom domain without replacing Porkbun mail records.
+- [ ] Verify the demo deployment and all public links before launch.
+- [ ] Deploy the reviewed build and verify the form from the public origin.
+
 ## Migrate trial requests to AWS
 
 - [ ] Replace Formspree with API Gateway, Lambda, and SES; evaluate DynamoDB for
@@ -51,3 +74,27 @@ verified with a fresh submission.
   - Verify persistence, delivery, retries, and visible failures end to end before
     switching traffic; retire Formspree only after successful cutover.
   - Review migration before exceeding the free quota or requiring more control.
+
+## Privacy integration review
+
+- [x] Prepare local notice page, explicit authorization, version and timestamp fields.
+- [x] Prepare manual request/retention procedures and empty private-register templates.
+- [ ] Deferred to AWS migration: review jurisdiction given actual operations.
+- [ ] Deferred to AWS migration: review provider agreements and safeguards.
+- [ ] Confirm Formspree validates and preserves authorization evidence.
+- [x] Prepare the approved publication text, remove review banners and set version
+  and effective date to 2026-09-21. Deployment remains pending.
+- [ ] Adopt the manual procedure and create populated registers in private storage.
+
+## Deferred provider review
+
+- [x] Document public evidence and prepare unsent provider inquiries in
+  [provider-review.md](docs/provider-review.md).
+- [ ] Revisit personal Gmail arrangements during migration.
+- Provider inquiries remain unsent; owner declined contacting providers.
+- [ ] Reassess applicable disclosures and actual operating location during migration.
+
+Owner decision: prioritize the Colombian trial-request notice and current free
+workflow. Additional review is deferred, not resolved. No assertion is made that
+operations or provider processing occur exclusively in Colombia. AWS migration
+alone does not establish legal compliance.

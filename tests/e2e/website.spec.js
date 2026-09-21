@@ -45,6 +45,7 @@ async function fillRequest(page) {
   await page.getByLabel('Correo electrónico').fill('test@example.com');
   await page.getByLabel('Celular / WhatsApp').fill('3001234567');
   await page.getByLabel('Instagram, página web').fill('@barberia_prueba');
+  await page.getByRole('checkbox').check();
 }
 
 for (const outcome of ['accepted', 'rejected', 'network-error']) {
@@ -87,4 +88,22 @@ test('keyboard skip link, reduced motion, demo links and local assets', async ({
   expect(externalLinks.every(link => link === 'https://demo.reserbot.co/')).toBe(true);
   expect(await page.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   expect(errors).toEqual([]);
+});
+
+test('privacy page and explicit authorization', async ({ page }) => {
+  let posts = 0;
+  await page.route('https://formspree.io/f/*', route => { posts++; return route.abort(); });
+  await page.goto('/');
+  await fillRequest(page);
+  await page.getByRole('checkbox').uncheck();
+  await page.getByRole('button', { name: 'Solicitar prueba gratis' }).click();
+  expect(posts).toBe(0);
+  await expect(page.locator('#request-success')).toBeHidden();
+  await page.goto('/privacidad.html');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('privacidad');
+  await expect(page.locator('main')).toContainText('Diego Mario Garcia Medellin');
+  await expect(page.locator('main')).toContainText('Versión: 2026-09-21');
+  await expect(page.locator('main')).not.toContainText('pendiente de aprobación');
+  await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });
+  expect(await page.evaluate(async () => (await axe.run()).violations)).toEqual([]);
 });

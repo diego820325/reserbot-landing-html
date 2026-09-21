@@ -15,23 +15,29 @@ test('only a confirmed provider response acknowledges a request', async () => {
     sent = { url, options };
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   });
-  assert.deepEqual(await service.submit({ email: 'test@example.com', unexpected: 'omit' }), { accepted: true });
+  assert.deepEqual(await service.submit({ privacyConsent: 'accepted', email: 'test@example.com', unexpected: 'omit' }), { accepted: true });
   assert.equal(sent.url, config.endpoint);
   assert.equal(sent.options.method, 'POST');
   assert.equal(sent.options.credentials, 'omit');
-  assert.deepEqual(JSON.parse(sent.options.body), { email: 'test@example.com', _gotcha: '' });
+  const body = JSON.parse(sent.options.body);
+  assert.equal(body.email, 'test@example.com');
+  assert.equal(body.unexpected, undefined);
+  assert.equal(body.privacyConsent, 'accepted');
+  assert.equal(body.privacyVersion, '2026-09-21');
+  assert.ok(Number.isFinite(Date.parse(body.consentRecordedAt)));
+
 });
 
 for (const [status, body] of [[200, '{}'], [200, '{"ok":false}'], [400, '{"errors":[]}'], [429, '{}'], [500, '{}'], [200, '<html>']]) {
   test(`does not confirm status ${status} with ${body}`, async () => {
     const service = createTrialService(config, async () => new Response(body, { status }));
-    await assert.rejects(service.submit({}));
+    await assert.rejects(service.submit({ privacyConsent: 'accepted' }));
   });
 }
 
 test('network failure remains a failure', async () => {
   const service = createTrialService(config, async () => { throw new TypeError('offline'); });
-  await assert.rejects(service.submit({}), /offline/);
+  await assert.rejects(service.submit({ privacyConsent: 'accepted' }), /offline/);
 });
 
 test('disabled or untrusted endpoints never transmit data', async () => {
@@ -39,7 +45,14 @@ test('disabled or untrusted endpoints never transmit data', async () => {
     let called = false;
     const service = createTrialService(settings, async () => { called = true; });
     assert.equal(service.available, false);
-    await assert.rejects(service.submit({}));
+    await assert.rejects(service.submit({ privacyConsent: 'accepted' }));
     assert.equal(called, false);
   }
+});
+
+test('missing authorization prevents transmission', async () => {
+  let sent = false;
+  const service = createTrialService(config, async () => { sent = true; });
+  await assert.rejects(service.submit({}), /authorization/);
+  assert.equal(sent, false);
 });

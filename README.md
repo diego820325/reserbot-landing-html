@@ -84,3 +84,18 @@ Keep copy in Colombian Spanish and code/documentation in English. Preserve visib
 keyboard focus, semantic headings, reduced-motion preferences, and WCAG AA contrast.
 Do not add fabricated customer proof, WhatsApp integration claims, analytics, or
 unapproved product capabilities. Commits require explicit approval after review.
+
+## Privacy publication status
+
+`src/privacidad.html` is the authoritative notice prepared for publication,
+version `2026-09-21`, effective 21 September 2026. The form requires an
+unchecked-by-default authorization and sends that version and a client timestamp.
+Keep the notice and adapter versions aligned when changing the policy. The earlier
+Markdown draft is historical working material, not the publishable source.
+Confirm provider-side enforcement and preservation of authorization fields.
+No automated retention system is configured and the site has not been deployed.
+
+See `docs/privacy-operations.md` and the empty templates in `docs/templates/`.
+Never commit populated registers. The owner chose to focus this notice on
+Colombian trial requests and defer additional jurisdiction/provider review to
+the AWS migration. This decision is not a finding of regulatory compliance.

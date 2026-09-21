@@ -119,6 +119,7 @@
             <div><label class="mb-2 block text-sm font-medium" for="phone">Celular / WhatsApp</label><input id="phone" type="tel" name="phone" autocomplete="tel" required minlength="7" maxlength="25"></div>
             <div><label class="mb-2 block text-sm font-medium" for="business-link">Instagram, página web o enlace de Google Maps de la barbería</label><input id="business-link" name="businessLink" type="text" required maxlength="2048" aria-describedby="business-link-help"><p id="business-link-help" class="mt-2 text-xs text-text-muted">Un enlace o el usuario de Instagram para identificar tu negocio.</p></div>
             <p class="text-xs leading-relaxed text-text-muted">Usaremos estos datos para gestionar tu prueba y contactarte. La solicitud se procesa mediante Formspree.</p>
+            <label class="consent-label" for="privacy-consent"><input id="privacy-consent" name="privacyConsent" type="checkbox" value="accepted" required> <span>Autorizo el tratamiento de mis datos para gestionar mi solicitud de prueba y contactarme, conforme al <a href="./privacidad.html" target="_blank" rel="noopener" class="underline">aviso de privacidad (abre otra pestaña)</a>.</span></label>
             <button type="submit" class="button w-full">Solicitar prueba gratis</button>
           </fieldset>
           <p class="support text-center">Sin tarjeta · Sin compromiso · Configuración incluida</p>
@@ -127,6 +128,6 @@
       </div>
     </section>
   </main>
-  <footer class="border-t border-border"><div class="site-shell flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center"><a href="#" aria-label="Reserbot, volver al inicio"><img src="./assets/wordmark.svg" alt="reserbot" width="112" height="24"></a><p class="text-xs text-text-muted">Reservas más simples para tu barbería.</p><a href="https://demo.reserbot.co" class="py-2 text-sm font-medium hover:text-brand">Prueba la demo ↗</a></div></footer>
+  <footer class="border-t border-border"><div class="site-shell flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center"><a href="#" aria-label="Reserbot, volver al inicio"><img src="./assets/wordmark.svg" alt="reserbot" width="112" height="24"></a><p class="text-xs text-text-muted">Reservas más simples para tu barbería.</p><a href="./privacidad.html" class="py-2 text-sm underline">Privacidad</a><a href="https://demo.reserbot.co" class="py-2 text-sm font-medium hover:text-brand">Prueba la demo ↗</a></div></footer>
 </body>
 </html>
