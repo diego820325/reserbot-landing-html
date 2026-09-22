@@ -67,3 +67,26 @@ the AWS migration; provider inquiries must remain unsent. Earlier findings remai
 reference material, not active implementation prerequisites or resolved issues.
 Actual operations from Croatia and processing abroad have not changed. Neither
 this deferral nor migration to AWS constitutes a compliance determination.
+
+
+## Optional analytics notice update — prepared 2026-09-22
+
+Notice version `2026-09-22` adds PostHog Cloud EU without changing the approved
+trial-request purposes, controller, providers, rights or six-month lead retention.
+The adapter records this notice version for new submissions only. Preserve prior
+authorization evidence and the previous notice in version history; do not rewrite
+old records or infer analytics consent from a trial request.
+
+Analytics consent version `2` is independent of the notice version sent to
+Formspree. The previous analytics version requires a fresh choice; no automatic
+time expiry applies. Optional analytics uses browser local/session storage and
+is separate from the form authorization. Withdrawal stops new collection but
+does not itself erase already delivered data; handle deletion requests separately.
+
+Owner-confirmed PostHog Free retention: Product Analytics up to one year and
+Session Replay up to 30 days. Review the notice and analytics consent version
+as appropriate when provider, plan or retention changes materially. No remote
+settings or production activation were changed by preparing this notice.
+
+After incorporation, review and replace the individual controller details in
+privacy, terms and applicable documentation. This remains future work.

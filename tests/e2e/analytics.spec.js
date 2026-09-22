@@ -195,3 +195,39 @@ test('consent remains usable when persistent storage is unavailable', async ({ p
   await page.reload();
   await expect(page.locator('.analytics-consent')).toBeVisible();
 });
+
+for (const choice of ['Aceptar', 'Rechazar']) {
+  test(`analytics ${choice} does not authorize or prevent trial submission`, async ({ page }) => {
+    await setup(page);
+    const submissions = [];
+    const posthogRequests = [];
+    page.on('request', request => {
+      if (request.url().includes('posthog.com')) posthogRequests.push(request.url());
+    });
+    await page.route('https://formspree.io/f/*', route => {
+      submissions.push(route.request().postDataJSON());
+      return route.fulfill({ json: { ok: true } });
+    });
+    await page.goto('/');
+    await page.getByRole('button', { name: choice, exact: true }).click();
+    await expect(page.locator('#privacy-consent')).not.toBeChecked();
+    await fill(page);
+    await page.locator('#privacy-consent').uncheck();
+    await page.getByRole('button', { name: 'Solicitar prueba gratis' }).click();
+    expect(submissions).toEqual([]);
+    await page.locator('#privacy-consent').check();
+    await page.getByRole('button', { name: 'Solicitar prueba gratis' }).click();
+    await expect(page.locator('#request-success')).toBeVisible();
+    expect(submissions).toHaveLength(1);
+    expect(submissions[0].privacyConsent).toBe('accepted');
+    expect(submissions[0].privacyVersion).toBe('2026-09-22');
+    expect(submissions[0]).not.toHaveProperty('consent_version');
+    const consent = await page.evaluate(() => JSON.parse(localStorage.getItem('reserbot.analytics.consent')));
+    expect(consent.state).toBe(choice === 'Aceptar' ? 'accepted' : 'rejected');
+    expect(consent.consent_version).toBe('2');
+    if (choice === 'Rechazar') {
+      expect(posthogRequests).toEqual([]);
+      expect(await names(page)).toEqual([]);
+    } else expect(await names(page)).toContain('trial_submitted');
+  });
+}

@@ -81,14 +81,18 @@ The five fields are business name, owner name, email, phone, and a business link
 - These approved commercial decisions supersede older context that described
   pricing as undecided and used `.com`. Existing repositories remain untouched.
 
-## Analytics (local implementation, public activation pending)
+## Analytics (consent required)
 
-PostHog is the only approved analytics provider. The implementation is disabled
-by default and has no project token. Localhost shows the consent UI for review;
-tests mock the SDK/configuration without sending real analytics. Consent is
+PostHog is the only approved analytics provider. Production activation was
+authorized on 2026-09-22 for EU project 281452, using its public browser token.
+The SDK loads only after explicit analytics consent. The local server optionally
+reads ignored `.env.local` values `POSTHOG_LOCAL_ENABLED=true` and
+`POSTHOG_PUBLIC_TOKEN` for consented EU verification. Automated tests intercept
+ingestion; the controlled normal-Chrome session was verified in the real project. Consent is
 versioned and has no automatic expiry. See [analytics.md](docs/analytics.md) for
 the event contract, privacy controls, testing, and mandatory activation review.
-The published privacy notice has not yet been extended to cover analytics.
+Notice version `2026-09-22` and analytics consent version `2` accompany the
+authorized production activation. IP discard is ON and GeoIP is paused.
 
 ## Maintenance
 
@@ -100,13 +104,17 @@ unapproved product capabilities. Commits require explicit approval after review.
 ## Privacy publication status
 
 `src/privacidad.html` is the authoritative notice prepared for publication,
-version `2026-09-21`, effective 21 September 2026. The form requires an
+version `2026-09-22`, dated 22 September 2026, approved for this production release. The form requires an
 unchecked-by-default authorization and sends that version and a client timestamp.
-Keep the notice and adapter versions aligned when changing the policy. The earlier
+Keep the notice and adapter versions aligned when changing the policy. Analytics
+uses independent `CONSENT_VERSION = '2'`: the expanded disclosure requires a new
+choice for older analytics consent records, without authorizing form processing.
+The form payload fields and required authorization checkbox are unchanged. The earlier
 Markdown draft is historical working material, not the publishable source.
 Confirm provider-side enforcement and preservation of authorization fields.
-No automated retention system is configured. The notice and site were deployed;
-HTTPS on the custom domain was verified on 2026-09-22.
+No automated lead-retention system is configured. Notice version `2026-09-21`
+was deployed previously; HTTPS was verified on 2026-09-22. PostHog Free retention
+confirmed by the owner is up to one year for events and 30 days for replay.
 
 See `docs/privacy-operations.md` and the empty templates in `docs/templates/`.
 Never commit populated registers. The owner chose to focus this notice on

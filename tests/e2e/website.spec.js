@@ -8,6 +8,11 @@ for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    for (const name of ['Aceptar', 'Rechazar']) {
+      await expect(page.getByRole('button', { name, exact: true })).toBeInViewport();
+    }
+    await expect(page.locator('.analytics-consent a')).toBeInViewport();
+    await expect(page.locator('.analytics-consent a')).toHaveAttribute('href', './privacidad.html');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const heroBounds = await page.locator('section[aria-labelledby="hero-title"]').boundingBox();
     const conversationBounds = await page.locator('#como-funciona > div').boundingBox();
@@ -103,7 +108,11 @@ test('privacy page and explicit authorization', async ({ page }) => {
   await page.goto('/privacidad.html');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('privacidad');
   await expect(page.locator('main')).toContainText('Diego Mario Garcia Medellin');
-  await expect(page.locator('main')).toContainText('Versión: 2026-09-21');
+  await expect(page.locator('main')).toContainText('Versión: 2026-09-22');
+  await expect(page.getByRole('heading', { name: 'Analítica del sitio' })).toBeVisible();
+  await expect(page.locator('section[aria-labelledby="analytics-title"]')).toContainText('1 año');
+  await expect(page.locator('section[aria-labelledby="analytics-title"]')).toContainText('30 días');
+  await expect(page.getByRole('link', { name: 'política de privacidad de PostHog' })).toHaveAttribute('href', 'https://posthog.com/privacy');
   await expect(page.locator('main')).not.toContainText('pendiente de aprobación');
   await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });
   expect(await page.evaluate(async () => (await axe.run()).violations)).toEqual([]);

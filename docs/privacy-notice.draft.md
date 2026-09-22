@@ -1,4 +1,5 @@
-> Superseded for publication by `src/privacidad.html`, version 2026-09-21.
+> Historical draft. Published notice: version 2026-09-21. The authoritative
+> local `src/privacidad.html` is now version 2026-09-22, pending publication.
 > Retained as working history and internal review notes; not included in the build.
 
 # Privacy notice — historical working draft

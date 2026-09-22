@@ -1,5 +1,5 @@
 export const CONSENT_KEY = 'reserbot.analytics.consent';
-export const CONSENT_VERSION = '1';
+export const CONSENT_VERSION = '2';
 
 export function readConsent(storage) {
   try {
@@ -29,7 +29,7 @@ export function mountConsent(onChange) {
   region.setAttribute('aria-labelledby', 'analytics-consent-title');
   region.innerHTML = `<div class="analytics-consent-inner">
     <div><h2 id="analytics-consent-title" tabindex="-1">Tu privacidad</h2>
-    <p>Con tu permiso, usamos PostHog para analizar visitas y grabar interacciones, sin registrar los datos del formulario. Puedes cambiar tu decisión en Preferencias de analítica.</p></div>
+    <p>Solo si aceptas, usamos PostHog para analizar cómo utilizas Reserbot y mejorar tu experiencia. Puede incluir grabaciones de interacción, pero el formulario y sus campos quedan excluidos. Puedes cambiar tu decisión en Preferencias de analítica.</p></div>
     <div class="analytics-consent-actions"><button type="button" data-choice="accepted">Aceptar</button>
     <button type="button" data-choice="rejected">Rechazar</button>
     <a href="./privacidad.html" target="_blank" rel="noopener">Privacidad<span class="sr-only"> (abre otra pestaña)</span></a></div></div>`;

@@ -18,6 +18,10 @@ test('consent persists indefinitely; only a version change invalidates a valid c
   }
   storage.setItem(CONSENT_KEY, JSON.stringify({ state: 'accepted', consent_version: 'old' }));
   assert.equal(readConsent(storage), 'undecided');
+  for (const state of ['accepted', 'rejected']) {
+    storage.setItem(CONSENT_KEY, JSON.stringify({ state, consent_version: '1' }));
+    assert.equal(readConsent(storage), 'undecided');
+  }
   storage.setItem(CONSENT_KEY, '{');
   assert.equal(readConsent(storage), 'undecided');
   assert.equal(readConsent(undefined), 'undecided');

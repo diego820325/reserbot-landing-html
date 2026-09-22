@@ -20,7 +20,7 @@ export function createTrialService(config, fetchRequest = globalThis.fetch) {
           phone: request.phone,
           businessLink: request.businessLink,
           privacyConsent: 'accepted',
-          privacyVersion: '2026-09-21',
+          privacyVersion: '2026-09-22',
           privacyNotice: '/privacidad.html',
           consentRecordedAt: new Date().toISOString(),
           _gotcha: request._gotcha || '',

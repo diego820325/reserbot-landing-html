@@ -23,7 +23,7 @@ test('only a confirmed provider response acknowledges a request', async () => {
   assert.equal(body.email, 'test@example.com');
   assert.equal(body.unexpected, undefined);
   assert.equal(body.privacyConsent, 'accepted');
-  assert.equal(body.privacyVersion, '2026-09-21');
+  assert.equal(body.privacyVersion, '2026-09-22');
   assert.ok(Number.isFinite(Date.parse(body.consentRecordedAt)));
 
 });

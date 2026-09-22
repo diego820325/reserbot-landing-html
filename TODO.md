@@ -3,13 +3,19 @@
 ## Landing analytics (PostHog only)
 
 - [x] Implement local consent UI, independent analytics, B1/B2/B3 events, and
-  first/session attribution. Keep public activation disabled and token empty.
+  first/session attribution. Production activation authorized on 2026-09-22.
 - [x] Persist accepted/rejected with consent_version; no automatic expiry.
-- [ ] Review the real EU project, public token, IP discard, GeoIP settings,
-  replay sampling/triggers/minimum duration, and effective data retention.
-- [ ] Review and approve the privacy-notice extension before public activation.
-- [ ] Verify controlled synthetic events and replay in the real reviewed project.
-- [ ] Authorize public activation separately. No production analytics enabled yet.
+- [x] Verify EU project/token, effective GeoIP-disabled events, replay settings
+  and controlled ingestion. Owner confirmed Free retention: events one year,
+  replay 30 days. Record user sessions enabled for the authorized activation.
+- [x] Confirm project-side IP discard ON and GeoIP transformation paused.
+- [x] Prepare incremental notice extension and consent UX, notice version
+  `2026-09-22` and independent analytics consent version `2`.
+- [x] Review final privacy copy and approve it with the final banner correction.
+- [x] Verify controlled synthetic events, all five UTMs plus first-touch, and
+  masked replay in EU project 281452 (2026-09-22). Replay restored OFF.
+- [x] Authorize public activation, replay, commit/push and Pages deployment
+  explicitly on 2026-09-22.
 
 See [analytics.md](docs/analytics.md). First valid interested barbershop request is
 the commercial objective; audience quality remains a priority diagnostic hypothesis.
@@ -39,15 +45,17 @@ the commercial objective; audience quality remains a priority diagnostic hypothe
 - [ ] Confirm the account uses the Free plan and inspect its quota and spam settings.
 - [x] Complete the privacy notice with the confirmed data controller identity,
   processing purposes, contact details, retention policy, and user rights.
-  - Publication text: [privacy notice](src/privacidad.html), version `2026-09-21`.
-    Published on 2026-09-22 with rights, procedures and provider disclosures.
+  - Published notice: version `2026-09-21`, deployed on 2026-09-22.
+    [Local notice](src/privacidad.html) version `2026-09-22` adds optional
+    analytics in the authorized release. Existing trial-request provisions are preserved.
   - Additional jurisdiction and provider-contract review deferred at the owner's
     request; revisit with the AWS migration. This is not a compliance finding.
   - Effective date and form link are configured; operational tracking remains below.
   - Controller confirmed: Diego Mario Garcia Medellin, acting as an individual.
     Public use of the name and contact details was explicitly authorized.
-  - After incorporation, replace the individual controller with the confirmed
-    company details as applicable and notify affected data subjects of the change.
+  - After Reserbot incorporates as a legal entity, review and replace the current
+    individual controller details in privacy, terms and applicable documentation;
+    notify affected data subjects as applicable.
   - Approved retention: delete non-converted trial requests six months after
     last contact, including remaining Formspree records and email copies.
 - [ ] Implement last-contact tracking and deletion at the approved deadline.
@@ -73,7 +81,8 @@ custom domain and provider-side validation checks remain pending.
 - [x] Publish production on Cloudflare Pages Free, connected to GitHub main.
 - [x] Configure HTTPS for `reserbot.co`; landing and privacy returned 200 on
   2026-09-22. Cloudflare nameservers propagated and Porkbun MX records remain intact.
-- [ ] Deploy `demo.reserbot.co` and verify demo links; it still points to parking.
+- [ ] Deploy/fix `demo.reserbot.co` and verify demo links; controlled verification
+  on 2026-09-22 returned Cloudflare 525 (SSL handshake failed).
 - [x] Deploy reviewed commit `e2e5903` through Cloudflare Pages.
 - [ ] Submit a fresh test from `https://reserbot.co`, verify receipt after the DNS
   migration, and confirm stored authorization/version fields.
