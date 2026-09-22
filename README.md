@@ -25,14 +25,17 @@ They cover four viewport widths, WCAG A/AA automated checks, keyboard entry,
 reduced motion, asset loading, and disconnected/success/failure form states.
 These tools are development-only dependencies.
 
-Deploy only `dist/` to a static host when launch requirements are complete. No
-hosting account, DNS, or deployment is configured by this project.
+Production is hosted on Cloudflare Pages Free at `https://reserbot.co`, with
+`https://reserbot-landing-html.pages.dev` as the provider hostname. GitHub `main`
+builds with `npm run build` and publishes `dist/`. DNS is managed by Cloudflare;
+domain registration and email forwarding remain at Porkbun. See
+[deployment details](docs/cloudflare-deployment.md).
 The canonical origin is `https://reserbot.co`; all demo links target
 `https://demo.reserbot.co`. The demo deployment is a separate prerequisite.
 
 ## Trial requests: Formspree
 
-The form is enabled locally with Formspree. A test notification reached the
+The published form is enabled with Formspree. A test notification reached the
 owner inbox on 2026-09-21 after being released from Formspree spam; a second
 test reached the inbox automatically without intervention. Provider
 acceptance does not guarantee inbox delivery; review the spam queue regularly.
@@ -93,7 +96,8 @@ unchecked-by-default authorization and sends that version and a client timestamp
 Keep the notice and adapter versions aligned when changing the policy. The earlier
 Markdown draft is historical working material, not the publishable source.
 Confirm provider-side enforcement and preservation of authorization fields.
-No automated retention system is configured and the site has not been deployed.
+No automated retention system is configured. The notice and site were deployed;
+HTTPS on the custom domain was verified on 2026-09-22.
 
 See `docs/privacy-operations.md` and the empty templates in `docs/templates/`.
 Never commit populated registers. The owner chose to focus this notice on

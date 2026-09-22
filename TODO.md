@@ -10,7 +10,7 @@
   `solicitudes@reserbot.co` arrived in the destination Gmail inbox.
   Future forwarding tests must use a sender different from the destination.
 
-## Required before launching trial-request collection
+## Trial-request collection and follow-up
 
 - Decision (2026-09-21): use Formspree Free for speed; migrate to AWS later.
 - Form endpoint configured: `https://formspree.io/f/mqpaqeqb`. A synthetic test
@@ -23,16 +23,15 @@
 - [ ] Verify provider-side required fields and length limits against the website.
   Browser validation alone is not server-side validation.
 - [ ] Confirm the account uses the Free plan and inspect its quota and spam settings.
-- [ ] Complete the privacy notice with the confirmed data controller identity,
+- [x] Complete the privacy notice with the confirmed data controller identity,
   processing purposes, contact details, retention policy, and user rights.
   - Publication text: [privacy notice](src/privacidad.html), version `2026-09-21`.
-    Rights, request procedures, statutory deadlines, and provider disclosures drafted.
+    Published on 2026-09-22 with rights, procedures and provider disclosures.
   - Additional jurisdiction and provider-contract review deferred at the owner's
     request; revisit with the AWS migration. This is not a compliance finding.
-  - Implement request handling and deadline tracking; set the effective date
-    and link the reviewed notice and authorization from the form.
+  - Effective date and form link are configured; operational tracking remains below.
   - Controller confirmed: Diego Mario Garcia Medellin, acting as an individual.
-    Public use of the name was explicitly authorized. Complete remaining fields.
+    Public use of the name and contact details was explicitly authorized.
   - After incorporation, replace the individual controller with the confirmed
     company details as applicable and notify affected data subjects of the change.
   - Approved retention: delete non-converted trial requests six months after
@@ -51,16 +50,19 @@
   - Until connected, clearly communicate that submission is unavailable; never
     simulate a successful request.
 
-The Formspree adapter is enabled locally. Before publication, verify provider
-field rules and the privacy notice. Automatic notification delivery has been
-verified with a fresh submission.
+The Formspree adapter is enabled on the published site. Automatic notification
+delivery was verified before deployment; a fresh browser submission from the
+custom domain and provider-side validation checks remain pending.
 
 ## Publish the website
 
-- [ ] Select hosting and explicitly confirm the deployment environment.
-- [ ] Configure HTTPS and the custom domain without replacing Porkbun mail records.
-- [ ] Verify the demo deployment and all public links before launch.
-- [ ] Deploy the reviewed build and verify the form from the public origin.
+- [x] Publish production on Cloudflare Pages Free, connected to GitHub main.
+- [x] Configure HTTPS for `reserbot.co`; landing and privacy returned 200 on
+  2026-09-22. Cloudflare nameservers propagated and Porkbun MX records remain intact.
+- [ ] Deploy `demo.reserbot.co` and verify demo links; it still points to parking.
+- [x] Deploy reviewed commit `e2e5903` through Cloudflare Pages.
+- [ ] Submit a fresh test from `https://reserbot.co`, verify receipt after the DNS
+  migration, and confirm stored authorization/version fields.
 
 ## Migrate trial requests to AWS
 
@@ -83,7 +85,7 @@ verified with a fresh submission.
 - [ ] Deferred to AWS migration: review provider agreements and safeguards.
 - [ ] Confirm Formspree validates and preserves authorization evidence.
 - [x] Prepare the approved publication text, remove review banners and set version
-  and effective date to 2026-09-21. Deployment remains pending.
+  and effective date to 2026-09-21. Published on 2026-09-22.
 - [ ] Adopt the manual procedure and create populated registers in private storage.
 
 ## Deferred provider review
