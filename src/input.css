@@ -12,7 +12,7 @@
 }
 @layer base {
   html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
-  body { margin: 0; background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; padding-bottom: var(--consent-height, 0px); background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
   :focus-visible { outline: 3px solid #2563eb; outline-offset: 5px; }
   [hidden] { display: none !important; }
   button, input { font: inherit; }
@@ -31,6 +31,17 @@
   .section-title { font-size: clamp(2rem, 3.7vw, 3.1rem); line-height: 1.14; letter-spacing: -.045em; font-weight: 600; text-wrap: balance; }
   .support { font-size: .75rem; line-height: 1.8; color: #6b7280; }
 }
+.analytics-consent { position: fixed; inset: auto 0 0; z-index: 40; background: #fff; border-top: 1px solid #9ca3af; max-height: 70dvh; overflow-y: auto; font-family: var(--font-sans); }
+.analytics-consent-inner { width: min(100% - 3rem, 1160px); margin: auto; padding: 1rem 0; display: flex; align-items: center; gap: 1.5rem; }
+.analytics-consent h2 { font-size: 1rem; font-weight: 600; margin: 0 0 .4rem; }
+.analytics-consent p { font-size: .875rem; line-height: 1.5; margin: 0; max-width: 680px; }
+.analytics-consent-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; flex-shrink: 0; }
+.analytics-consent button { min-height: 44px; padding: .65rem 1rem; border: 1px solid #6b7280; border-radius: 8px; cursor: pointer; color: #111; background: #fff; }
+.analytics-consent button[data-choice="accepted"] { color: #fff; background: #2563eb; border-color: #2563eb; }
+.analytics-consent a, .analytics-preferences { font-size: .875rem; text-decoration: underline; min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; }
+.analytics-preferences { color: #111; background: transparent; border: 0; padding: .5rem 0; }
+footer > div { flex-wrap: wrap; }
+@media (max-width: 900px) { .analytics-consent-inner { flex-direction: column; align-items: stretch; gap: 1rem; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -1,5 +1,19 @@
 # Pending work
 
+## Landing analytics (PostHog only)
+
+- [x] Implement local consent UI, independent analytics, B1/B2/B3 events, and
+  first/session attribution. Keep public activation disabled and token empty.
+- [x] Persist accepted/rejected with consent_version; no automatic expiry.
+- [ ] Review the real EU project, public token, IP discard, GeoIP settings,
+  replay sampling/triggers/minimum duration, and effective data retention.
+- [ ] Review and approve the privacy-notice extension before public activation.
+- [ ] Verify controlled synthetic events and replay in the real reviewed project.
+- [ ] Authorize public activation separately. No production analytics enabled yet.
+
+See [analytics.md](docs/analytics.md). First valid interested barbershop request is
+the commercial objective; audience quality remains a priority diagnostic hypothesis.
+
 ## Trial-request destination
 
 - Free Porkbun forwarding for `solicitudes@reserbot.co` was created and verified

@@ -81,6 +81,15 @@ The five fields are business name, owner name, email, phone, and a business link
 - These approved commercial decisions supersede older context that described
   pricing as undecided and used `.com`. Existing repositories remain untouched.
 
+## Analytics (local implementation, public activation pending)
+
+PostHog is the only approved analytics provider. The implementation is disabled
+by default and has no project token. Localhost shows the consent UI for review;
+tests mock the SDK/configuration without sending real analytics. Consent is
+versioned and has no automatic expiry. See [analytics.md](docs/analytics.md) for
+the event contract, privacy controls, testing, and mandatory activation review.
+The published privacy notice has not yet been extended to cover analytics.
+
 ## Maintenance
 
 Keep copy in Colombian Spanish and code/documentation in English. Preserve visible

@@ -19,6 +19,7 @@ for (const width of [320, 390, 768, 1440]) {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },
     })).violations);
     expect(violations).toEqual([]);
+    await page.screenshot({ path: `test-results/consent-${width}.png` });
     await page.screenshot({ path: `test-results/website-${width}.png`, fullPage: true });
   });
 }

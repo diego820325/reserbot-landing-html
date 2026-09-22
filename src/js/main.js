@@ -28,6 +28,7 @@ form.addEventListener('submit', async (event) => {
     success.hidden = false;
     success.focus();
     form.reset();
+    form.dispatchEvent(new Event('trial:accepted'));
   } catch {
     notice.textContent = 'No pudimos enviar tu solicitud. Tus datos no se han confirmado. Inténtalo de nuevo.';
     fields.disabled = false;

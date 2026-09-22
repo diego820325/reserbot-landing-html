@@ -18,6 +18,7 @@
   <link rel="icon" type="image/svg+xml" href="./assets/wordmark.svg">
   <link rel="stylesheet" href="./output.css">
   <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/analytics-bootstrap.js"></script>
 </head>
 <body class="font-sans">
   <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-white focus:p-4">Ir al contenido</a>
@@ -110,7 +111,7 @@
     <section id="solicitud" aria-labelledby="request-title" class="site-shell border-t border-border py-16 sm:py-20">
       <div class="mx-auto max-w-155"><p class="eyebrow mb-4 text-text-muted">El primer paso</p><h2 id="request-title" class="section-title">Prueba Reserbot 30 días gratis</h2><p class="mt-4 leading-relaxed text-text-muted">Cuéntanos quién eres. La configuración de tu barbería la hacemos contigo después.</p>
         <p id="submission-notice" role="status" class="mt-7 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed">El envío de solicitudes aún no está habilitado. Por ahora, puedes <a class="font-medium text-brand underline underline-offset-4" href="https://demo.reserbot.co">probar la demo</a>.</p>
-        <form id="trial-form" aria-describedby="submission-notice" class="mt-7 space-y-5">
+        <form id="trial-form" aria-describedby="submission-notice" class="ph-no-capture mt-7 space-y-5">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden aria-hidden="true">
           <fieldset disabled class="space-y-5"><legend class="sr-only">Datos para solicitar la prueba</legend>
             <div><label class="mb-2 block text-sm font-medium" for="business-name">Nombre de la barbería</label><input id="business-name" name="businessName" autocomplete="organization" required maxlength="160"></div>
